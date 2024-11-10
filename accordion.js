@@ -1,16 +1,27 @@
 (() => {
     const $elm = document.querySelector('#js-accordion');
     const $trigger = $elm.getElementsByTagName('a');
+    const triggerLen = $trigger.length;
 
-    $trigger[0].addEventListener("click", (e) => clickHandler(e));
+    let index = 0;
+    while(index < triggerLen) {
+        $trigger[index].addEventListener("click", (e) => clickHandler(e));
+        index++;
+    }
 
     //clickしたら実行される処理
     const clickHandler = (e) => {
         e.preventDefault();
         
-        const $content = e.target.nextElementSibling;
-        $content.style.display = "block";
+        const $target = e.currentTarget;        
+        const $content = $target.nextElementSibling;
 
+        if($content.style.display === "block") {
+            $content.style.display = "none";
+        } else {
+            $content.style.display = "block"
+        }
+        
         
     }
 }
